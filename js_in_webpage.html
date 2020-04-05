@@ -1,0 +1,86 @@
+<html>
+<!--
+    Note to Students:
+        This is a very short introduction to using Javascript in the browser.
+        To see this as a webpage, you have to start a *Local Web Server*. There are many ways to do this: since you all have python installed,
+         we will use python.
+        - Open terminal
+        - 'cd' into the directory where this html file is (js_in_webpage.html):  "C:\Users\Rob\Desktop\CUNY  23501347\608 Viz\Module5"
+        - Type the following into the terminal and hit 'enter':  Python –m http.server
+            your server should read something like: Serving HTTP on 0.0.0.0 port 8000 ...
+        - now go to any browser and type in the HTTP address and the filename: http://localhost:8000/js_in_webpage.html
+        ------ my screen says Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+        - Congrats: you now have a local HTTP server running. Now, every time you change this file and save it, when you reload the browser you 
+          will see your changes!
+-->
+
+
+<head>
+    <title>Data 608 HW5 Hodde</title>
+    <h1>DATA 608 - Module 5</h1>
+    <h2>Spring 2020 </h2>
+    <h2>John Hodde </h2>
+    <h2>April 5, 2020 </h2>
+    <script type="text/javascript"></script>
+</head>
+
+<body>
+
+</script>
+<script type="text/javascript">
+
+//create a function to reverse any word you type in.
+function reverse(sWord){
+    var sReverse = sWord.split("").reverse().join("");  // https://www.freecodecamp.org/news/how-to-reverse-a-string-in-javascript-in-3-different-ways-75e4763c68cb/
+    return sReverse;
+}
+
+function calc(){
+    var t = document.getElementById("target");
+    t.innerHTML = reverse(document.getElementById('sWord').value);
+}
+
+
+// to display multiplication table   adapted from: https://github.com/wwells/CUNY_DATA_608/blob/master/section5/HW5.html
+function defineTable(num){
+    iMultipliers = [];  // establish an empty array variable
+    var htmlTable = '<table border="1">'; // define the table as having a thin border around every cell
+    for (i = 1; i <= 20; i++) {iMultipliers.push(num * i)}; // make array of 20 elements, each a multiple of user inputted number
+    for (i = 0; i < 20; i++){
+        if (i % 4 == 0) {htmlTable = htmlTable +'<tr>'};  //start a new row when i is divisible by 4
+        htmlTable = htmlTable + '<td>' + iMultipliers[i] + '</td>'; //add new cell and shift one column right
+        if (i % 4 == 3){
+            htmlTable = htmlTable + '</tr>' // if the remainder is 3, we are on the far right column; end the row
+        };
+    };
+    htmlTable = htmlTable + '</table>';  // end the table
+    return htmlTable
+};
+
+function displayTable(){
+    var t = document.getElementById("target");
+    t.innerHTML = defineTable(document.getElementById('num').value);
+}
+
+
+
+</script>
+<!-- UI to reverse a word-->
+<form>
+    <input id="sWord" type="text" maxlength="512">
+    <input type="button" value="Reverse" onClick="calc();">
+</form>
+<br>
+
+<!-- UI to create multiplication table-->
+<form name="myTable">
+    <input id="num" type="number" size="2">
+    <input type="button" value="Generate Table" onClick="displayTable();">
+</form>
+<br>
+
+<div id="target"></div>
+
+</body>
+</html>
+
